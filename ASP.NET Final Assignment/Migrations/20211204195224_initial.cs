@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASP.NET_Final_Assignment.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,35 @@ namespace ASP.NET_Final_Assignment.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BankAccounts",
+                columns: table => new
+                {
+                    accountNum = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    accountType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    balance = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BankAccounts", x => x.accountNum);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    clientID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    lastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    firstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.clientID);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +181,65 @@ namespace ASP.NET_Final_Assignment.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ClientAccounts",
+                columns: table => new
+                {
+                    clientID = table.Column<int>(type: "int", nullable: false),
+                    accountNum = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientAccounts", x => new { x.clientID, x.accountNum });
+                    table.ForeignKey(
+                        name: "FK_ClientAccounts_BankAccounts_accountNum",
+                        column: x => x.accountNum,
+                        principalTable: "BankAccounts",
+                        principalColumn: "accountNum",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ClientAccounts_Clients_clientID",
+                        column: x => x.clientID,
+                        principalTable: "Clients",
+                        principalColumn: "clientID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "BankAccounts",
+                columns: new[] { "accountNum", "accountType", "balance" },
+                values: new object[,]
+                {
+                    { 1, "Chequing", "1000" },
+                    { 2, "Saving", "2000" },
+                    { 3, "Chequing", "3000" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clients",
+                columns: new[] { "clientID", "email", "firstName", "lastName" },
+                values: new object[,]
+                {
+                    { 1, "cam@home.com", "Charlene", "Cam" },
+                    { 2, "choi@home.com", "Calvin", "Choi" },
+                    { 3, "craig@home.com", "Carly", "Craig" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ClientAccounts",
+                columns: new[] { "accountNum", "clientID" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "ClientAccounts",
+                columns: new[] { "accountNum", "clientID" },
+                values: new object[] { 2, 2 });
+
+            migrationBuilder.InsertData(
+                table: "ClientAccounts",
+                columns: new[] { "accountNum", "clientID" },
+                values: new object[] { 3, 3 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +278,11 @@ namespace ASP.NET_Final_Assignment.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientAccounts_accountNum",
+                table: "ClientAccounts",
+                column: "accountNum");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,10 +303,19 @@ namespace ASP.NET_Final_Assignment.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ClientAccounts");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "BankAccounts");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
         }
     }
 }

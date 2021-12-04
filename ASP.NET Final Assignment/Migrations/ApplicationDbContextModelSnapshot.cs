@@ -19,6 +19,120 @@ namespace ASP.NET_Final_Assignment.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.ApplicationDbContext+ClientAccount", b =>
+                {
+                    b.Property<int>("clientID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("accountNum")
+                        .HasColumnType("int");
+
+                    b.HasKey("clientID", "accountNum");
+
+                    b.HasIndex("accountNum");
+
+                    b.ToTable("ClientAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            clientID = 1,
+                            accountNum = 1
+                        },
+                        new
+                        {
+                            clientID = 2,
+                            accountNum = 2
+                        },
+                        new
+                        {
+                            clientID = 3,
+                            accountNum = 3
+                        });
+                });
+
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.BankAccount", b =>
+                {
+                    b.Property<int>("accountNum")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("accountType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("balance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("accountNum");
+
+                    b.ToTable("BankAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            accountNum = 1,
+                            accountType = "Chequing",
+                            balance = "1000"
+                        },
+                        new
+                        {
+                            accountNum = 2,
+                            accountType = "Saving",
+                            balance = "2000"
+                        },
+                        new
+                        {
+                            accountNum = 3,
+                            accountType = "Chequing",
+                            balance = "3000"
+                        });
+                });
+
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.Client", b =>
+                {
+                    b.Property<int>("clientID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("clientID");
+
+                    b.ToTable("Clients");
+
+                    b.HasData(
+                        new
+                        {
+                            clientID = 1,
+                            email = "cam@home.com",
+                            firstName = "Charlene",
+                            lastName = "Cam"
+                        },
+                        new
+                        {
+                            clientID = 2,
+                            email = "choi@home.com",
+                            firstName = "Calvin",
+                            lastName = "Choi"
+                        },
+                        new
+                        {
+                            clientID = 3,
+                            email = "craig@home.com",
+                            firstName = "Carly",
+                            lastName = "Craig"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -219,6 +333,25 @@ namespace ASP.NET_Final_Assignment.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.ApplicationDbContext+ClientAccount", b =>
+                {
+                    b.HasOne("ASP.NET_Final_Assignment.Data.BankAccount", "BankAccount")
+                        .WithMany("ClientAccount")
+                        .HasForeignKey("accountNum")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ASP.NET_Final_Assignment.Data.Client", "Client")
+                        .WithMany("ClientAccount")
+                        .HasForeignKey("clientID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("BankAccount");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -268,6 +401,16 @@ namespace ASP.NET_Final_Assignment.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.BankAccount", b =>
+                {
+                    b.Navigation("ClientAccount");
+                });
+
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.Client", b =>
+                {
+                    b.Navigation("ClientAccount");
                 });
 #pragma warning restore 612, 618
         }

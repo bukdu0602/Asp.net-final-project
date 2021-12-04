@@ -22,6 +22,7 @@ namespace ASP.NET_Final_Assignment.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             // Define composite primary keys.
             modelBuilder.Entity<ClientAccount>()
                 .HasKey(ps => new { ps.clientID, ps.accountNum });
@@ -38,30 +39,48 @@ namespace ASP.NET_Final_Assignment.Data
                 .WithMany(p => p.ClientAccount)
                 .HasForeignKey(fk => new { fk.accountNum })
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
+
+            modelBuilder.Entity<Client>().HasData(
+                 new Client { clientID = 1, lastName = "Cam", firstName = "Charlene", email = "cam@home.com" },
+            new Client { clientID = 2, lastName = "Choi", firstName = "Calvin", email = "choi@home.com" },
+            new Client { clientID = 3, lastName = "Craig", firstName = "Carly", email = "craig@home.com" });
+
+            modelBuilder.Entity<BankAccount>().HasData(
+                new BankAccount { accountNum = 1, accountType = "Chequing", balance = "1000" },
+                new BankAccount { accountNum = 2, accountType = "Saving", balance = "2000" },
+                new BankAccount { accountNum = 3, accountType = "Chequing", balance = "3000" });
+
+            modelBuilder.Entity<ClientAccount>().HasData(
+                new ClientAccount { clientID = 1, accountNum = 1 },
+                new ClientAccount { clientID = 2, accountNum = 2 },
+                new ClientAccount { clientID = 3, accountNum = 3 });
+
         }
 
-        public class Client
-        {
-            [Key]
-            public int clientID { get; set; }
-            public string lastName { get; set; }
-            public string firstName { get; set; }
-            public string email { get; set; }
-      
-            public virtual ICollection<ClientAccount>
-                ClientAccount { get; set; }
-        }
+        //public class Client
+        //{
+        //    [Key]
+        //    public int clientID { get; set; }
+        //    public string lastName { get; set; }
+        //    public string firstName { get; set; }
+        //    public string email { get; set; }
 
-        public class BankAccount
-        {
-            [Key]
-            public int accountNum { get; set; }
-            public string accountType { get; set; }
-            public string balance { get; set; }
+        //    public virtual ICollection<ClientAccount>
+        //        ClientAccount
+        //    { get; set; }
+        //}
 
-            public virtual ICollection<ClientAccount>
-                ClientAccount { get; set; }
-        }
+        //public class BankAccount
+        //{
+        //    [Key]
+        //    public int accountNum { get; set; }
+        //    public string accountType { get; set; }
+        //    public string balance { get; set; }
+
+        //    public virtual ICollection<ClientAccount>
+        //        ClientAccount
+        //    { get; set; }
+        //}
 
         public class ClientAccount
         {
@@ -74,10 +93,10 @@ namespace ASP.NET_Final_Assignment.Data
             public virtual BankAccount BankAccount { get; set; }
         }
     }
-
-
-
     ///------------------------------------------
+
+
+
 
 
 }
