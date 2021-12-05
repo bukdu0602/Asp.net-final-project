@@ -25,6 +25,7 @@ namespace ASP.NET_Final_Assignment.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            ApplicationDbContext db = new ApplicationDbContext();
             return View();
         }
 

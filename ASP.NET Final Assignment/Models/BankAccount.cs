@@ -12,7 +12,7 @@ namespace ASP.NET_Final_Assignment.Data
         [Key]
         public int accountNum { get; set; }
         public string accountType { get; set; }
-        public string balance { get; set; }
+        public decimal balance { get; set; }
 
         public virtual ICollection<ClientAccount>
             ClientAccount

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASP.NET_Final_Assignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211204195224_initial")]
+    [Migration("20211205011425_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,23 +34,6 @@ namespace ASP.NET_Final_Assignment.Migrations
                     b.HasIndex("accountNum");
 
                     b.ToTable("ClientAccounts");
-
-                    b.HasData(
-                        new
-                        {
-                            clientID = 1,
-                            accountNum = 1
-                        },
-                        new
-                        {
-                            clientID = 2,
-                            accountNum = 2
-                        },
-                        new
-                        {
-                            clientID = 3,
-                            accountNum = 3
-                        });
                 });
 
             modelBuilder.Entity("ASP.NET_Final_Assignment.Data.BankAccount", b =>
@@ -63,32 +46,12 @@ namespace ASP.NET_Final_Assignment.Migrations
                     b.Property<string>("accountType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("balance")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("balance")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("accountNum");
 
                     b.ToTable("BankAccounts");
-
-                    b.HasData(
-                        new
-                        {
-                            accountNum = 1,
-                            accountType = "Chequing",
-                            balance = "1000"
-                        },
-                        new
-                        {
-                            accountNum = 2,
-                            accountType = "Saving",
-                            balance = "2000"
-                        },
-                        new
-                        {
-                            accountNum = 3,
-                            accountType = "Chequing",
-                            balance = "3000"
-                        });
                 });
 
             modelBuilder.Entity("ASP.NET_Final_Assignment.Data.Client", b =>
@@ -110,29 +73,6 @@ namespace ASP.NET_Final_Assignment.Migrations
                     b.HasKey("clientID");
 
                     b.ToTable("Clients");
-
-                    b.HasData(
-                        new
-                        {
-                            clientID = 1,
-                            email = "cam@home.com",
-                            firstName = "Charlene",
-                            lastName = "Cam"
-                        },
-                        new
-                        {
-                            clientID = 2,
-                            email = "choi@home.com",
-                            firstName = "Calvin",
-                            lastName = "Choi"
-                        },
-                        new
-                        {
-                            clientID = 3,
-                            email = "craig@home.com",
-                            firstName = "Carly",
-                            lastName = "Craig"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

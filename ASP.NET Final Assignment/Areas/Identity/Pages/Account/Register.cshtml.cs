@@ -109,7 +109,7 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
                     BankAccount addAccount = new BankAccount()
                     {
                         accountType = Input.AccountType,
-                        balance = Input.Balance
+                        balance = Convert.ToDecimal(Input.Balance)
                     };
                     _context.BankAccounts.Add(addAccount);
                     _context.SaveChanges();

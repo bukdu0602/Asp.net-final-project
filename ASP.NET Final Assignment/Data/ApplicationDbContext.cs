@@ -11,6 +11,10 @@ namespace ASP.NET_Final_Assignment.Data
 
     public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -40,20 +44,20 @@ namespace ASP.NET_Final_Assignment.Data
                 .HasForeignKey(fk => new { fk.accountNum })
                 .OnDelete(DeleteBehavior.Restrict); // Prevent cascade delete
 
-            modelBuilder.Entity<Client>().HasData(
-                 new Client { clientID = 1, lastName = "Cam", firstName = "Charlene", email = "cam@home.com" },
-            new Client { clientID = 2, lastName = "Choi", firstName = "Calvin", email = "choi@home.com" },
-            new Client { clientID = 3, lastName = "Craig", firstName = "Carly", email = "craig@home.com" });
+            //modelBuilder.Entity<Client>().HasData(
+            //     new Client { clientID = 1, lastName = "Cam", firstName = "Charlene", email = "cam@home.com" },
+            //new Client { clientID = 2, lastName = "Choi", firstName = "Calvin", email = "choi@home.com" },
+            //new Client { clientID = 3, lastName = "Craig", firstName = "Carly", email = "craig@home.com" });
 
-            modelBuilder.Entity<BankAccount>().HasData(
-                new BankAccount { accountNum = 1, accountType = "Chequing", balance = "1000" },
-                new BankAccount { accountNum = 2, accountType = "Saving", balance = "2000" },
-                new BankAccount { accountNum = 3, accountType = "Chequing", balance = "3000" });
+            //modelBuilder.Entity<BankAccount>().HasData(
+            //    new BankAccount { accountNum = 1, accountType = "Chequing", balance = "1000" },
+            //    new BankAccount { accountNum = 2, accountType = "Saving", balance = "2000" },
+            //    new BankAccount { accountNum = 3, accountType = "Chequing", balance = "3000" });
 
-            modelBuilder.Entity<ClientAccount>().HasData(
-                new ClientAccount { clientID = 1, accountNum = 1 },
-                new ClientAccount { clientID = 2, accountNum = 2 },
-                new ClientAccount { clientID = 3, accountNum = 3 });
+            //modelBuilder.Entity<ClientAccount>().HasData(
+            //    new ClientAccount { clientID = 1, accountNum = 1 },
+            //    new ClientAccount { clientID = 2, accountNum = 2 },
+            //    new ClientAccount { clientID = 3, accountNum = 3 });
 
         }
 
@@ -82,16 +86,16 @@ namespace ASP.NET_Final_Assignment.Data
         //    { get; set; }
         //}
 
-        public class ClientAccount
-        {
-            [Key, Column(Order = 0)]
-            public int clientID { get; set; }
-            [Key, Column(Order = 1)]
-            public int accountNum { get; set; }
+        //public class ClientAccount
+        //{
+        //    [Key, Column(Order = 0)]
+        //    public int clientID { get; set; }
+        //    [Key, Column(Order = 1)]
+        //    public int accountNum { get; set; }
 
-            public virtual Client Client { get; set; }
-            public virtual BankAccount BankAccount { get; set; }
-        }
+        //    public virtual Client Client { get; set; }
+        //    public virtual BankAccount BankAccount { get; set; }
+        //}
     }
     ///------------------------------------------
 

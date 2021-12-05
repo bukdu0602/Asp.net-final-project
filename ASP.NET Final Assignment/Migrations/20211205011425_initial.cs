@@ -53,7 +53,7 @@ namespace ASP.NET_Final_Assignment.Migrations
                     accountNum = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     accountType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    balance = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,41 +204,6 @@ namespace ASP.NET_Final_Assignment.Migrations
                         principalColumn: "clientID",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-                table: "BankAccounts",
-                columns: new[] { "accountNum", "accountType", "balance" },
-                values: new object[,]
-                {
-                    { 1, "Chequing", "1000" },
-                    { 2, "Saving", "2000" },
-                    { 3, "Chequing", "3000" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Clients",
-                columns: new[] { "clientID", "email", "firstName", "lastName" },
-                values: new object[,]
-                {
-                    { 1, "cam@home.com", "Charlene", "Cam" },
-                    { 2, "choi@home.com", "Calvin", "Choi" },
-                    { 3, "craig@home.com", "Carly", "Craig" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ClientAccounts",
-                columns: new[] { "accountNum", "clientID" },
-                values: new object[] { 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "ClientAccounts",
-                columns: new[] { "accountNum", "clientID" },
-                values: new object[] { 2, 2 });
-
-            migrationBuilder.InsertData(
-                table: "ClientAccounts",
-                columns: new[] { "accountNum", "clientID" },
-                values: new object[] { 3, 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -28,7 +28,6 @@ a {
 -------------------------------------------------- */
 html {
     font-size: 14px;
-    background-color: red;
 }
 @media (min-width: 768px) {
   html {
@@ -62,7 +61,6 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  background-color: red;
 }
 .footer {
   position: absolute;
@@ -74,6 +72,15 @@ body {
 
 
 .mainSelectAccount {
+    text-align: center;
+    display: block;
+    padding: 20px;
     border: solid grey;
-    background-color: red;
+}
+
+.logo {
+    font-family: Cambria;
+    padding: 5px;
+    border: solid red;
+    background-color: cornsilk;
 }
