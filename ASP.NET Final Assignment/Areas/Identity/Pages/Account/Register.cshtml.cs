@@ -114,6 +114,19 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
                     _context.BankAccounts.Add(addAccount);
                     _context.SaveChanges();
 
+                    int customerID = addClient.clientID;
+                    int accountNum = addAccount.accountNum;
+
+                    ClientAccount addClientAccount = new ClientAccount()
+                    {
+                        clientID = customerID,
+                        accountNum = accountNum
+                        
+                    };
+                    _context.ClientAccounts.Add(addClientAccount);
+                    _context.SaveChanges();
+
+
 
                     // ---------------------------------
                     _logger.LogInformation("User created a new account with password.");

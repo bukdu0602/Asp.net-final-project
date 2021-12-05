@@ -196,3 +196,5 @@ C:\Users\lnh06\OneDrive - nluva.com\BCIT SSD Program\Visual studio projects\ASP.
 C:\Users\lnh06\OneDrive - nluva.com\BCIT SSD Program\Visual studio projects\ASP.NET Final Assignment\ASP.NET Final Assignment\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Error.cshtml.g.cs
 C:\Users\lnh06\OneDrive - nluva.com\BCIT SSD Program\Visual studio projects\ASP.NET Final Assignment\ASP.NET Final Assignment\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\lnh06\OneDrive - nluva.com\BCIT SSD Program\Visual studio projects\ASP.NET Final Assignment\ASP.NET Final Assignment\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\lnh06\OneDrive - nluva.com\BCIT SSD Program\Visual studio projects\ASP.NET Final Assignment\ASP.NET Final Assignment\obj\Debug\net5.0\Razor\Views\Accounts\Privacy.cshtml.g.cs
+C:\Users\lnh06\OneDrive - nluva.com\BCIT SSD Program\Visual studio projects\ASP.NET Final Assignment\ASP.NET Final Assignment\obj\Debug\net5.0\Razor\Views\Accounts\Index.cshtml.g.cs

@@ -19,21 +19,6 @@ namespace ASP.NET_Final_Assignment.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.ApplicationDbContext+ClientAccount", b =>
-                {
-                    b.Property<int>("clientID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("accountNum")
-                        .HasColumnType("int");
-
-                    b.HasKey("clientID", "accountNum");
-
-                    b.HasIndex("accountNum");
-
-                    b.ToTable("ClientAccounts");
-                });
-
             modelBuilder.Entity("ASP.NET_Final_Assignment.Data.BankAccount", b =>
                 {
                     b.Property<int>("accountNum")
@@ -71,6 +56,21 @@ namespace ASP.NET_Final_Assignment.Migrations
                     b.HasKey("clientID");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.ClientAccount", b =>
+                {
+                    b.Property<int>("clientID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("accountNum")
+                        .HasColumnType("int");
+
+                    b.HasKey("clientID", "accountNum");
+
+                    b.HasIndex("accountNum");
+
+                    b.ToTable("ClientAccounts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -273,7 +273,7 @@ namespace ASP.NET_Final_Assignment.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.ApplicationDbContext+ClientAccount", b =>
+            modelBuilder.Entity("ASP.NET_Final_Assignment.Data.ClientAccount", b =>
                 {
                     b.HasOne("ASP.NET_Final_Assignment.Data.BankAccount", "BankAccount")
                         .WithMany("ClientAccount")

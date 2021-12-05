@@ -50,9 +50,9 @@ namespace ASP.NET_Final_Assignment.Data
             //new Client { clientID = 3, lastName = "Craig", firstName = "Carly", email = "craig@home.com" });
 
             //modelBuilder.Entity<BankAccount>().HasData(
-            //    new BankAccount { accountNum = 1, accountType = "Chequing", balance = "1000" },
-            //    new BankAccount { accountNum = 2, accountType = "Saving", balance = "2000" },
-            //    new BankAccount { accountNum = 3, accountType = "Chequing", balance = "3000" });
+            //    new BankAccount { accountNum = 1, accountType = "Chequing", balance = 1000 },
+            //    new BankAccount { accountNum = 2, accountType = "Saving", balance = 2000 },
+            //    new BankAccount { accountNum = 3, accountType = "Chequing", balance = 3000 });
 
             //modelBuilder.Entity<ClientAccount>().HasData(
             //    new ClientAccount { clientID = 1, accountNum = 1 },
