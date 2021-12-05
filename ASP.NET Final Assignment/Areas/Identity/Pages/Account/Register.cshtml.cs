@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ASP.NET_Final_Assignment.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +24,15 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly ApplicationDbContext _context;
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -45,6 +48,22 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Account Type")]
+            public string AccountType { get; set; }
+
+            [Required]
+            [Display(Name = "Balance")]
+            public string Balance { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -78,6 +97,25 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    Client addClient = new Client()
+                    {
+                        lastName = Input.LastName,
+                        firstName = Input.FirstName,
+                        email = Input.Email
+                    };
+                    _context.Clients.Add(addClient);
+                    _context.SaveChanges();
+
+                    BankAccount addAccount = new BankAccount()
+                    {
+                        accountType = Input.AccountType,
+                        balance = Input.Balance
+                    };
+                    _context.BankAccounts.Add(addAccount);
+                    _context.SaveChanges();
+
+
+                    // ---------------------------------
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
