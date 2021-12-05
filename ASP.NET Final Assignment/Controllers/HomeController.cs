@@ -1,4 +1,6 @@
-﻿using ASP.NET_Final_Assignment.Models;
+﻿using ASP.NET_Final_Assignment.Data;
+using ASP.NET_Final_Assignment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,11 +15,14 @@ namespace ASP.NET_Final_Assignment.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
