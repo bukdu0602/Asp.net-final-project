@@ -22,7 +22,7 @@ namespace ASP.NET_Final_Assignment.Controllers
             _context = context;
         }
 
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             ApplicationDbContext db = new ApplicationDbContext();
