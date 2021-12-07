@@ -55,6 +55,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.clientID">Edit</a>
-    
+    <a asp-action="Edit" asp-route-clientID="@Model.clientID" asp-route-accountNum="@Model.accountNum">Edit</a> |
+    <a asp-action="Delete" asp-route-clientID="@Model.clientID" asp-route-accountNum="@Model.accountNum">Delete</a>
+
+
+
 </div>
