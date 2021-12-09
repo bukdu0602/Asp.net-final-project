@@ -1,8 +1,6 @@
 ﻿@model ASP.NET_Final_Assignment.ViewModel.AccountDetailsVM
 
-@{
-    ViewData["Title"] = "Create";
-}
+@{ ViewData["Title"] = "Create"; }
 
 <h1>Create</h1>
 
@@ -14,7 +12,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="accountType" class="control-label"></label>
-                <select name="accountType">
+                <select name="accountType" class="form-control">
                     <option value="">Select</option>
                     <option value="Chequig">Chequing</option>
                     <option value="Saving">Saving</option>
@@ -36,4 +34,6 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

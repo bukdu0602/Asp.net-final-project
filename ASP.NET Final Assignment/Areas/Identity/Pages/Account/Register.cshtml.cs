@@ -49,11 +49,13 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [RegularExpression(@"^[a-zA-Z]+[ a-zA-Z-_]*$")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
             [Required]
             [Display(Name = "Last Name")]
+            [RegularExpression(@"^[a-zA-Z]+[ a-zA-Z-_]*$")]
             public string LastName { get; set; }
 
             [Required]
@@ -159,6 +161,7 @@ namespace ASP.NET_Final_Assignment.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+
             return Page();
         }
     }

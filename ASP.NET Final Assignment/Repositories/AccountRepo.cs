@@ -1,5 +1,6 @@
 ﻿using ASP.NET_Final_Assignment.Data;
 using ASP.NET_Final_Assignment.ViewModel;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +25,8 @@ namespace ASP.NET_Final_Assignment.Repositories
                              ).FirstOrDefault();
 
             var editQuery2 = (from b in _context.BankAccounts
-                             where accountDetailsVM.accountNum == b.accountNum
-                             select b
+                              where accountDetailsVM.accountNum == b.accountNum
+                              select b
                              ).FirstOrDefault();
 
 
@@ -59,7 +60,7 @@ namespace ASP.NET_Final_Assignment.Repositories
         {
             var detailQuery = (from c in _context.Clients
                                from b in _context.BankAccounts
-                               where (id == c.clientID && aNum == b.accountNum )
+                               where (id == c.clientID && aNum == b.accountNum)
                                select new AccountDetailsVM()
                                {
                                    clientID = c.clientID,
@@ -79,6 +80,7 @@ namespace ASP.NET_Final_Assignment.Repositories
                         from b in _context.BankAccounts
                         from nav2 in b.ClientAccount
                         where (c.email == email && c.clientID == nav.clientID && nav.accountNum == b.accountNum)
+                        orderby b.accountNum descending
                         select new AccountDetailsVM()
                         {
                             clientID = c.clientID,
@@ -141,5 +143,15 @@ namespace ASP.NET_Final_Assignment.Repositories
             return true;
         }
 
+        public Client getNameSession(string email)
+        {
+
+            var clientQuery = (from c in _context.Clients
+                               where c.email == email
+                               select c).FirstOrDefault();
+
+
+            return clientQuery;
+        }
     }
 }

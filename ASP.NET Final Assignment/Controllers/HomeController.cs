@@ -1,6 +1,8 @@
 ﻿using ASP.NET_Final_Assignment.Data;
 using ASP.NET_Final_Assignment.Models;
+using ASP.NET_Final_Assignment.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,7 +27,22 @@ namespace ASP.NET_Final_Assignment.Controllers
         //[Authorize]
         public IActionResult Index()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
+            var email = User.Identity.Name;
+            if (email != null)
+            {
+                AccountRepo accountRepository = new AccountRepo(_context);
+                var nameSession = accountRepository.getNameSession(User.Identity.Name);
+
+                if (HttpContext.Session.GetString("nameKey") == null)
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                ViewBag.Name = HttpContext.Session.GetString("nameKey");
+            }
             return View();
         }
 

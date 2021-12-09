@@ -2,6 +2,7 @@
 using ASP.NET_Final_Assignment.Repositories;
 using ASP.NET_Final_Assignment.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
@@ -22,6 +23,22 @@ namespace ASP.NET_Final_Assignment.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            var email = User.Identity.Name;
+            if (email != null)
+            {
+                AccountRepo accountRepository = new AccountRepo(_context);
+                var nameSession = accountRepository.getNameSession(User.Identity.Name);
+
+                if (HttpContext.Session.GetString("nameKey") == null)
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                ViewBag.Name = HttpContext.Session.GetString("nameKey");
+            }
             AccountRepo accountRepo = new AccountRepo(_context);
             var query = accountRepo.GetList( User.Identity.Name);
 
@@ -30,6 +47,22 @@ namespace ASP.NET_Final_Assignment.Controllers
         [Authorize]
         public IActionResult Details(int clientID, int accountNum)
         {
+            var email = User.Identity.Name;
+            if (email != null)
+            {
+                AccountRepo accountRepository = new AccountRepo(_context);
+                var nameSession = accountRepository.getNameSession(User.Identity.Name);
+
+                if (HttpContext.Session.GetString("nameKey") == null)
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                ViewBag.Name = HttpContext.Session.GetString("nameKey");
+            }
             AccountRepo accountRepo = new AccountRepo(_context);
             var detailQuery = accountRepo.GetDetail(clientID, accountNum);
             return View(detailQuery);
@@ -37,6 +70,22 @@ namespace ASP.NET_Final_Assignment.Controllers
         [Authorize]
         public IActionResult Edit(int? clientID, int? accountNum)
         {
+            var email = User.Identity.Name;
+            if (email != null)
+            {
+                AccountRepo accountRepository = new AccountRepo(_context);
+                var nameSession = accountRepository.getNameSession(User.Identity.Name);
+
+                if (HttpContext.Session.GetString("nameKey") == null)
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                ViewBag.Name = HttpContext.Session.GetString("nameKey");
+            }
             AccountRepo accountRepo = new AccountRepo(_context);
             var editQuery = accountRepo.GetEdit(clientID, accountNum);
             
@@ -47,17 +96,31 @@ namespace ASP.NET_Final_Assignment.Controllers
         public IActionResult Edit(
     [Bind("clientID,lastName,firstName, accountNum, balance")] AccountDetailsVM accountDetailsVM)
         {
-            if (accountDetailsVM.firstName != null && accountDetailsVM.lastName != null &&
-                accountDetailsVM.balance != null)
-            {
+            
                 AccountRepo accountRepo = new AccountRepo(_context);
                 accountRepo.Update(accountDetailsVM);
-            }
+            
             return RedirectToAction("Index", "Accounts");
         }
 
         public IActionResult Create()
         {
+            var email = User.Identity.Name;
+            if (email != null)
+            {
+                AccountRepo accountRepository = new AccountRepo(_context);
+                var nameSession = accountRepository.getNameSession(User.Identity.Name);
+
+                if (HttpContext.Session.GetString("nameKey") == null)
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("nameKey", nameSession.firstName);
+                }
+                ViewBag.Name = HttpContext.Session.GetString("nameKey");
+            }
             ViewData["accountType"] = new SelectList(_context.BankAccounts, "accountType", "accountType");
             return View();
         }
@@ -66,11 +129,10 @@ namespace ASP.NET_Final_Assignment.Controllers
         public IActionResult Create(
             [Bind( "balance, accountType")] AccountDetailsVM accountDetailsVM)
         {
-            if (accountDetailsVM.balance != null && accountDetailsVM.accountType != null)
-            {
+            
                 AccountRepo accountRepo = new AccountRepo(_context);
                 accountRepo.Create(accountDetailsVM, User.Identity.Name);
-            }
+            
             return RedirectToAction("Index", "Accounts");
         }
 

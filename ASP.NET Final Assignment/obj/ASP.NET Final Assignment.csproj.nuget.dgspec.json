@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lnh06\\OneDrive - nluva.com\\BCIT SSD Program\\Visual studio projects\\ASP.NET Final Assignment\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj": {}
+    "C:\\Users\\lnh06\\Desktop\\Asp.net-final-project-main (2)\\Asp.net-final-project-main\\Asp.net-final-project-main\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lnh06\\OneDrive - nluva.com\\BCIT SSD Program\\Visual studio projects\\ASP.NET Final Assignment\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj": {
+    "C:\\Users\\lnh06\\Desktop\\Asp.net-final-project-main (2)\\Asp.net-final-project-main\\Asp.net-final-project-main\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lnh06\\OneDrive - nluva.com\\BCIT SSD Program\\Visual studio projects\\ASP.NET Final Assignment\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj",
+        "projectUniqueName": "C:\\Users\\lnh06\\Desktop\\Asp.net-final-project-main (2)\\Asp.net-final-project-main\\Asp.net-final-project-main\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj",
         "projectName": "ASP.NET Final Assignment",
-        "projectPath": "C:\\Users\\lnh06\\OneDrive - nluva.com\\BCIT SSD Program\\Visual studio projects\\ASP.NET Final Assignment\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj",
+        "projectPath": "C:\\Users\\lnh06\\Desktop\\Asp.net-final-project-main (2)\\Asp.net-final-project-main\\Asp.net-final-project-main\\ASP.NET Final Assignment\\ASP.NET Final Assignment.csproj",
         "packagesPath": "C:\\Users\\lnh06\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lnh06\\OneDrive - nluva.com\\BCIT SSD Program\\Visual studio projects\\ASP.NET Final Assignment\\ASP.NET Final Assignment\\obj\\",
+        "outputPath": "C:\\Users\\lnh06\\Desktop\\Asp.net-final-project-main (2)\\Asp.net-final-project-main\\Asp.net-final-project-main\\ASP.NET Final Assignment\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lnh06\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -57,6 +57,10 @@
               "version": "[5.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.12, )"
             },

@@ -28,12 +28,18 @@ namespace ASP.NET_Final_Assignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite("Data Source=.\\wwwroot\\sql.db"));
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            // Add this before AddMvc() is called.
+            services.AddSession(options => {
+                // Set timeout.
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -51,6 +57,7 @@ namespace ASP.NET_Final_Assignment
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
